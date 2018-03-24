@@ -1,4 +1,4 @@
-import pygame,sys,os,math
+import pygame, os, sys, math
 from pygame.locals import *
 from pygame.time import *
 
@@ -19,6 +19,8 @@ pygame.display.set_icon(MySprite)
 MySprite = pygame.transform.scale(MySprite,(128,128))
 myFont = pygame.font.SysFont('monospace', 26)
 
+pygame.mixer.music.load('bgsound.wav')
+pygame.mixer.music.play(-1)
 
 def input(events):
 	for event in events:
@@ -137,12 +139,14 @@ while True:
 	Character.GetKey(new_event)
 	Character.Movement()
 	Character.update(screen)
+
 	
 	if Res.Jumpressed == False:
 		Iter += 1
 		if Iter > 30:
 			Highscore = max(Result.Result,Highscore)
 			Result.Result = 0
+			#Audio.fail.play()
 			Iter = 0
 	
 	Chart = myFont.render('Bhops: ' + str(Result.Result),1,(0,0,0))
